@@ -23,21 +23,23 @@
             font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
                 Roboto, "Helvetica Neue", Arial, sans-serif;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #ffe5d9, #ffd1dc, #fff5e1, #fadadd, #fdf2f8);
+            background: linear-gradient(135deg, #e9e1c5, #e6ddc6, #f1ead4, #e8e0c9, #efe8d3);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             scroll-behavior: smooth;
         }
 
         @keyframes gradientShift {
-
-            0%,
-            100% {
+            0% {
                 background-position: 0% 50%;
             }
 
             50% {
                 background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
             }
         }
 
@@ -184,7 +186,8 @@
             display: block;
             animation: heartbeat 2s ease-in-out infinite;
         }
-        .doubleheart::before{
+
+        .doubleheart::before {
             content: "💕";
             font-size: 35px;
             display: block;
@@ -312,7 +315,7 @@
         </section>
 
         <!-- 🎯 Action Section -->
-        <section class="w-full min-h-screen flex items-center justify-center bg-pink-50 px-4">
+        <section class="w-full min-h-screen flex items-center justify-center px-4">
             <div class="w-full max-w-5xl flex flex-col items-center text-center space-y-8">
                 <h1 data-aos="zoom-in" class="text-5xl md:text-7xl font-light text-gray-800">
                     Say it with a gift 💝

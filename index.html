@@ -289,8 +289,8 @@
             <div class="floating-element doubleheart" style="--delay: 6s; --duration: 17s; left: 95%; top: 90%;"></div>
             <div class="floating-element ribbonheart" style="--delay: 6s; --duration: 17s; left: 75%; top: 60%;"></div>
 
-            <div class="ribbon ribbon-1"></div>
-            <div class="ribbon ribbon-2"></div>
+            <!-- <div class="ribbon ribbon-1"></div>
+            <div class="ribbon ribbon-2"></div> -->
         </div>
 
         <!-- 💖 Hero Section -->
@@ -387,8 +387,9 @@
             <div class="bg-white p-6 rounded-2xl shadow-2xl w-11/12 sm:w-[400px] text-center relative">
                 <h3 class="text-xl font-semibold text-pink-600 mb-3">🎉 Let’s share this!</h3>
                 <p class="text-gray-600 mb-4">Add this image to your Instagram story with hashtags:</p>
-                <img src="https://i.imgur.com/ylY6s3C.png" alt="Instagram Story"
-                    class="rounded-lg shadow mb-4 mx-auto" />
+                <img src="/image2.jpg" alt="Instagram Story"
+                    class="rounded-lg shadow mb-4 mx-auto w-full h-1/2 object-contain" />
+
                 <p class="text-sm text-gray-500 mb-4">#SayItWithAGift #LoveChallenge</p>
                 <div class="flex flex-col gap-3">
                     <button id="shareBtn"
@@ -466,6 +467,15 @@
             mirror: false,
         });
     </script>
+    <script>
+        // 💡 Reset all button states on page refresh
+        window.addEventListener("DOMContentLoaded", () => {
+            localStorage.removeItem("dailyTaskCompleted");
+            localStorage.removeItem("sharedOnInstagram");
+            localStorage.removeItem("rewardClaimed");
+        });
+    </script>
+
     <script>
         const openBtn = document.getElementById("openPopupBtn");
         const closeBtn = document.getElementById("closePopupBtn");

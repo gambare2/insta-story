@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Say it with a Gift 💝</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, "Helvetica Neue", Arial, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ffe5d9, #ffd1dc, #fff5e1, #fadadd, #fdf2f8);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            scroll-behavior: smooth;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Animated floating elements */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sparkle-corner {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            animation: sparkleFloat 4s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .sparkle-corner::before,
+        .sparkle-corner::after {
+            content: "✨";
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: sparkleShimmer 3s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .sparkle-corner::after {
+            animation-delay: calc(var(--delay, 0s) + 1.5s);
+            font-size: 16px;
+        }
+
+        .top-left {
+            top: 5%;
+            left: 5%;
+        }
+
+        .top-right {
+            top: 5%;
+            right: 5%;
+        }
+
+        .bottom-left {
+            bottom: 5%;
+            left: 5%;
+        }
+
+        .bottom-right {
+            bottom: 5%;
+            right: 5%;
+        }
+
+        @keyframes sparkleFloat {
+
+            0%,
+            100% {
+                transform: translate(0);
+            }
+
+            50% {
+                transform: translate(10px, -10px);
+            }
+        }
+
+        @keyframes sparkleShimmer {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        .floating-element {
+            position: absolute;
+            animation: gentleFloat var(--duration, 15s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+            opacity: 0.5;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .floating-element:hover {
+            transform: scale(1.2) rotate(10deg);
+            opacity: 0.9;
+        }
+
+        @keyframes gentleFloat {
+
+            0%,
+            100% {
+                transform: translate(0) rotate(0);
+            }
+
+            25% {
+                transform: translate(15px, -20px) rotate(3deg);
+            }
+
+            50% {
+                transform: translate(-10px, -40px) rotate(-3deg);
+            }
+
+            75% {
+                transform: translate(20px, -20px) rotate(2deg);
+            }
+        }
+
+        .popup-overlay {
+            transition: opacity 0.3s ease;
+        }
+
+        .popup {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .popup.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .heart::before {
+            content: "❤️";
+            font-size: 35px;
+            display: block;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .ribbonheart::before {
+            content: "💝";
+            font-size: 35px;
+            display: block;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+        .doubleheart::before{
+            content: "💕";
+            font-size: 35px;
+            display: block;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .rose::before {
+            content: "🌹";
+            font-size: 40px;
+            display: block;
+        }
+
+        .ribbon {
+            position: absolute;
+            width: 80px;
+            height: 250px;
+            opacity: 0.2;
+        }
+
+        .ribbon-1 {
+            background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+            left: 10%;
+            top: -50px;
+            animation: ribbonWave 5s ease-in-out infinite;
+            transform-origin: top;
+        }
+
+        .ribbon-2 {
+            background: linear-gradient(90deg, transparent, #ffb6c1, transparent);
+            right: 15%;
+            top: -50px;
+            animation: ribbonWave 5s ease-in-out infinite;
+            animation-delay: 2.5s;
+            transform-origin: top;
+        }
+
+        @keyframes ribbonWave {
+
+            0%,
+            100% {
+                transform: rotate(-1deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(1deg) translateY(8px);
+            }
+        }
+
+        /* Text shimmer on hover */
+        .shimmer:hover {
+            background: linear-gradient(90deg, #ff69b4, #ffb6c1, #ffd1dc);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerMove 2s linear infinite;
+        }
+
+        @keyframes shimmerMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 🌟 Animated background -->
+        <div class="animated-bg">
+            <div class="sparkle-corner top-left" style="--delay: 0s;"></div>
+            <div class="sparkle-corner top-right" style="--delay: 2s;"></div>
+            <div class="sparkle-corner bottom-left" style="--delay: 4s;"></div>
+            <div class="sparkle-corner bottom-right" style="--delay: 1s;"></div>
+
+            <div class="floating-element rose" style="--delay: 6s; --duration: 17s; left: 15%; top: 20%;"></div>
+            <div class="floating-element doubleheart" style="--delay: 6s; --duration: 17s; left: 5%; top: 90%;"></div>
+            <div class="floating-element ribbonheart" style="--delay: 6s; --duration: 17s; left: 10%; top: 40%;"></div>
+            <div class="floating-element heart" style="--delay: 1s; --duration: 12s; left: 5%; top: 15%;"></div>
+            <div class="floating-element heart" style="--delay: 5s; --duration: 16s; left: 90%; top: 70%;"></div>
+            <div class="floating-element rose" style="--delay: 2s; --duration: 14s; left: 10%; top: 80%;"></div>
+            <div class="floating-element rose" style="--delay: 6s; --duration: 17s; left: 85%; top: 20%;"></div>
+            <div class="floating-element ribbonheart" style="--delay: 6s; --duration: 17s; left: 45%; top: 30%;"></div>
+            <div class="floating-element doubleheart" style="--delay: 6s; --duration: 17s; left: 95%; top: 90%;"></div>
+            <div class="floating-element ribbonheart" style="--delay: 6s; --duration: 17s; left: 75%; top: 60%;"></div>
+
+            <div class="ribbon ribbon-1"></div>
+            <div class="ribbon ribbon-2"></div>
+        </div>
+
+        <!-- 💖 Hero Section -->
+        <section class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+            <h1 data-aos="zoom-in" class="text-5xl md:text-7xl font-light text-gray-800 mb-3 shimmer">
+                Say it with a gift
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="200" class="text-2xl italic text-gray-600 mb-12">
+                personalized for your love
+            </p>
+
+            <div data-aos="fade-up" data-aos-delay="400" class="flex flex-col gap-4">
+                <div
+                    class="bg-white/90 backdrop-blur-md px-8 py-4 rounded-full text-gray-700 font-medium shadow-lg border border-pink-200">
+                    💕 Sing a song by our Couple Hampers
+                </div>
+                <div
+                    class="bg-white/90 backdrop-blur-md px-8 py-4 rounded-full text-gray-700 font-medium shadow-lg border border-pink-200">
+                    🎁 Personalized Voice QR Cards — Limited Edition!
+                </div>
+            </div>
+        </section>
+
+        <!-- 🎯 Action Section -->
+        <section class="w-full min-h-screen flex items-center justify-center bg-pink-50 px-4">
+            <div class="w-full max-w-5xl flex flex-col items-center text-center space-y-8">
+                <h1 data-aos="zoom-in" class="text-5xl md:text-7xl font-light text-gray-800">
+                    Say it with a gift 💝
+                </h1>
+                <p data-aos="fade-up" class="text-2xl italic text-gray-600">
+                    Personalized for your love
+                </p>
+
+                <div class="flex flex-col gap-6 mt-12 w-full items-center">
+                    <!-- 1️⃣ Complete Task Button -->
+                    <button id="openPopupBtn" data-aos="flip-up"
+                        class="w-full md:w-3/4 flex items-center justify-center gap-5 bg-white/90 backdrop-blur-lg border border-pink-300 rounded-2xl px-8 py-5 text-xl font-medium text-gray-800 shadow-lg transition hover:-translate-y-1 hover:shadow-pink-200 hover:bg-pink-50">
+                        <span class="text-3xl">1️⃣</span> <span>Complete this task</span>
+                    </button>
+
+                    <!-- 2️⃣ Instagram Share Button -->
+                    <button id="shareIGBtn" data-aos="flip-up" data-aos-delay="200"
+                        class="w-full md:w-3/4 flex items-center justify-center gap-5 bg-white/90 backdrop-blur-lg border border-pink-300 rounded-2xl px-8 py-5 text-xl font-medium text-gray-800 shadow-lg transition hover:-translate-y-1 hover:shadow-pink-200 hover:bg-pink-50">
+                        <span class="text-3xl">2️⃣</span> <span>Put this on our IG</span>
+                    </button>
+
+                    <!-- 3️⃣ Claim Rewards Button -->
+                    <button id="claimBtn" data-aos="flip-up" data-aos-delay="400"
+                        class="w-full md:w-3/4 flex items-center justify-center gap-5 bg-gradient-to-r from-pink-500 to-rose-400 text-white rounded-2xl px-8 py-5 text-xl font-semibold shadow-lg transition hover:scale-105 hover:shadow-rose-300">
+                        <span class="text-3xl">3️⃣</span> <span>Claim rewards</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ✅ Daily Questions Popup -->
+        <div id="popupOverlay"
+            class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center hidden popup-overlay z-50">
+            <div id="popupBox" class="popup bg-white rounded-2xl shadow-2xl w-11/12 sm:w-96 p-6 relative">
+                <button id="closePopupBtn"
+                    class="absolute top-2 right-3 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+                <h2 class="text-xl font-semibold text-pink-600 mb-4 text-center">📝 Daily Questions</h2>
+
+                <form id="dailyForm" class="space-y-3">
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">1. What did you learn today?</label>
+                        <textarea id="ans1" class="w-full border rounded-lg p-2 text-sm" rows="2"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">2. What are your goals for tomorrow?</label>
+                        <textarea id="ans2" class="w-full border rounded-lg p-2 text-sm" rows="2"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">3. How do you feel today?</label>
+                        <select id="ans3" class="w-full border rounded-lg p-2 text-sm">
+                            <option>😊 Great</option>
+                            <option>🙂 Good</option>
+                            <option>😐 Okay</option>
+                            <option>😔 Bad</option>
+                        </select>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-pink-500 hover:bg-pink-600 text-white rounded-lg py-2 mt-2 transition">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ✅ Instagram Story Popup -->
+        <div id="storyModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
+            <div class="bg-white p-6 rounded-2xl shadow-2xl w-11/12 sm:w-[400px] text-center relative">
+                <h3 class="text-xl font-semibold text-pink-600 mb-3">🎉 Let’s share this!</h3>
+                <p class="text-gray-600 mb-4">Add this image to your Instagram story with hashtags:</p>
+                <img src="https://i.imgur.com/ylY6s3C.png" alt="Instagram Story"
+                    class="rounded-lg shadow mb-4 mx-auto" />
+                <p class="text-sm text-gray-500 mb-4">#SayItWithAGift #LoveChallenge</p>
+                <div class="flex flex-col gap-3">
+                    <button id="shareBtn"
+                        class="bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg py-2 transition hover:opacity-90">
+                        📸 Share on Instagram
+                    </button>
+                    <button id="closeStoryBtn"
+                        class="bg-gray-200 text-gray-700 rounded-lg py-2 hover:bg-gray-300">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🎁 Reward Claim Popup -->
+        <div id="rewardModal"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
+            <div class="popup bg-white p-8 rounded-2xl shadow-2xl w-11/12 sm:w-[400px] text-center relative">
+                <h3 class="text-2xl font-semibold text-pink-600 mb-4">🎁 Reward Unlocked!</h3>
+                <p class="text-gray-600 mb-6">Congratulations! You’ve completed all steps and earned your reward.</p>
+                <button id="claimRewardBtn"
+                    class="bg-pink-500 hover:bg-pink-600 text-white rounded-lg py-2 px-6 transition">
+                    Claim Now
+                </button>
+                <button id="closeRewardBtn" class="absolute top-3 right-4 text-gray-500 text-2xl">&times;</button>
+            </div>
+        </div>
+
+        <!-- 🌹 Features Section -->
+        <section class="relative z-0 bg-white/10 py-20 text-center px-4">
+            <h2 data-aos="fade-up" class="text-4xl font-light text-gray-800 mb-12 shimmer">
+                Why Choose Our Gifts?
+            </h2>
+
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+                <div data-aos="zoom-in"
+                    class="feature-card bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-pink-200 transition hover:-translate-y-1 hover:shadow-xl">
+                    <div class="text-4xl mb-3">💝</div>
+                    <h3 class="text-xl font-medium text-gray-800 mb-2">Personalized Touch</h3>
+                    <p class="text-gray-600">Every gift tells your unique love story</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="150"
+                    class="feature-card bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-pink-200 transition hover:-translate-y-1 hover:shadow-xl">
+                    <div class="text-4xl mb-3">🎵</div>
+                    <h3 class="text-xl font-medium text-gray-800 mb-2">Voice Messages</h3>
+                    <p class="text-gray-600">Add your voice with QR card technology</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="300"
+                    class="feature-card bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-pink-200 transition hover:-translate-y-1 hover:shadow-xl">
+                    <div class="text-4xl mb-3">📦</div>
+                    <h3 class="text-xl font-medium text-gray-800 mb-2">Premium Packaging</h3>
+                    <p class="text-gray-600">Beautiful presentation for special moments</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="450"
+                    class="feature-card bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-pink-200 transition hover:-translate-y-1 hover:shadow-xl">
+                    <div class="text-4xl mb-3">⚡</div>
+                    <h3 class="text-xl font-medium text-gray-800 mb-2">Fast Delivery</h3>
+                    <p class="text-gray-600">Express shipping to never miss a moment</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 💕 Footer -->
+        <footer data-aos="fade-up" class="relative z-10 bg-white/10 py-10 text-center">
+            <p class="text-gray-600">Made with love for those who love 💕</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: "ease-in-out",
+            once: true,
+            mirror: false,
+        });
+    </script>
+    <script>
+        const openBtn = document.getElementById("openPopupBtn");
+        const closeBtn = document.getElementById("closePopupBtn");
+        const popupOverlay = document.getElementById("popupOverlay");
+        const popupBox = document.getElementById("popupBox");
+        const dailyForm = document.getElementById("dailyForm");
+        const storyModal = document.getElementById("storyModal");
+        const closeStoryBtn = document.getElementById("closeStoryBtn");
+        const shareBtn = document.getElementById("shareBtn");
+        const shareIGBtn = document.getElementById("shareIGBtn");
+        const claimBtn = document.getElementById("claimBtn");
+        const rewardModal = document.getElementById("rewardModal");
+        const claimRewardBtn = document.getElementById("claimRewardBtn");
+        const closeRewardBtn = document.getElementById("closeRewardBtn");
+        // Open question popup
+        openBtn.addEventListener("click", () => {
+            popupOverlay.classList.remove("hidden");
+            setTimeout(() => popupBox.classList.add("active"), 10);
+        });
+        closeBtn.addEventListener("click", () => {
+            popupBox.classList.remove("active");
+            setTimeout(() => popupOverlay.classList.add("hidden"), 300);
+        });
+        popupOverlay.addEventListener("click", (e) => {
+            if (e.target === popupOverlay) closeBtn.click();
+        });
+
+        // Form submit
+        dailyForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            popupBox.classList.remove("active");
+            setTimeout(() => popupOverlay.classList.add("hidden"), 300);
+            alert("✅ Great job! Now click 'Put this on our IG' to share!");
+        });
+
+        // Share on IG
+        shareIGBtn.addEventListener("click", () => {
+            const alreadyShared = localStorage.getItem("sharedOnInstagram");
+            if (alreadyShared) {
+                shareIGBtn.innerHTML = "✅ Already Shared";
+                shareIGBtn.classList.add("disabled-btn");
+                return;
+            }
+            storyModal.classList.remove("hidden");
+            storyModal.classList.add("flex");
+        });
+
+        // Share action
+        shareBtn.addEventListener("click", () => {
+            const hashtags = encodeURIComponent("#SayItWithAGift #LoveChallenge");
+            window.open(`https://www.instagram.com/?hashtags=${hashtags}`, "_blank");
+            localStorage.setItem("sharedOnInstagram", "true");
+            alert("✅ Post shared! Thank you 💕");
+            storyModal.classList.add("hidden");
+            shareIGBtn.innerHTML = "✅ Already Shared";
+            shareIGBtn.classList.add("disabled-btn");
+        });
+
+        closeStoryBtn.addEventListener("click", () => {
+            storyModal.classList.add("hidden");
+        });
+
+        claimBtn.addEventListener("click", () => {
+            const taskDone = localStorage.getItem("dailyTaskCompleted");
+            const shared = localStorage.getItem("sharedOnInstagram");
+            const claimed = localStorage.getItem("rewardClaimed");
+
+            if (!taskDone || !shared) {
+                alert("⚠️ Please complete all steps before claiming your reward!");
+                return;
+            }
+
+            if (claimed) {
+                claimBtn.innerHTML = "🏆 Reward Already Claimed";
+                claimBtn.classList.add("disabled-btn");
+                return;
+            }
+
+            rewardModal.classList.remove("hidden");
+            rewardModal.classList.add("flex");
+            setTimeout(() => rewardModal.querySelector(".popup").classList.add("active"), 10);
+        });
+
+        claimRewardBtn.addEventListener("click", () => {
+            localStorage.setItem("rewardClaimed", "true");
+            rewardModal.classList.add("hidden");
+            claimBtn.innerHTML = "🏆 Reward Already Claimed";
+            claimBtn.classList.add("disabled-btn");
+            launchConfetti();
+            alert("🎉 Reward Claimed! Congratulations!");
+        });
+
+        closeRewardBtn.addEventListener("click", () => rewardModal.classList.add("hidden"));
+
+        // On load: check if already shared
+        window.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.getItem("sharedOnInstagram")) {
+                shareIGBtn.innerHTML = "✅ Already Shared";
+                shareIGBtn.classList.add("disabled-btn");
+            }
+        });
+    </script>
+</body>
+
+</html>
